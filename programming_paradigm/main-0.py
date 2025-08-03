@@ -9,22 +9,26 @@ def main():
         print("Commands: deposit:<amount>, withdraw:<amount>, display")
         sys.exit(1)
 
-    command_args = sys.argv[1].split(':')
-    command = command_args[0]
-    amount = float(command_args[1]) if len(command_args) > 1 else None
+    args = sys.argv[1].split(':')
+    command = args[0].lower()
+    amount = float(args[1]) if len(args) > 1 else None
 
     if command == "deposit" and amount is not None:
         account.deposit(amount)
-        print(f"Deposited: ${amount}")
+        print(f"Deposited: ${amount:.0f}")
+
     elif command == "withdraw" and amount is not None:
         if account.withdraw(amount):
-            print(f"Withdrew: ${amount}")
+            print(f"Withdrew: ${amount:.0f}")
         else:
             print("Insufficient funds.")
+
     elif command == "display":
         account.display_balance()
+
     else:
         print("Invalid command.")
 
 if __name__ == "__main__":
     main()
+    
